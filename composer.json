@@ -1,0 +1,28 @@
+{
+  "name": "thib92/flysystem-public-url-plugin",
+  "description": "A Flysystem plugin to get the public URL of a file",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thibault HENRY",
+      "email": "thibhenry92@gmail.com"
+    }
+  ],
+  "scripts": {
+    "test": "phpunit --testdox tests/"
+  },
+  "require": {
+    "league/flysystem": "^1.1@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Thib\\FlysystemPublicUrlPlugin\\": "src/",
+      "Thib\\FlysystemPublicUrlPluginTest\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "league/flysystem-aws-s3-v3": "^1.0@dev",
+    "phpunit/phpunit": "^8"
+  }
+}
