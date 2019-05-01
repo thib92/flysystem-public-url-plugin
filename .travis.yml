@@ -7,4 +7,4 @@ install:
   - composer install
 
 script:
-  - compsoer run-script test
+  - composer run-script test
