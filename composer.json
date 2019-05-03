@@ -1,7 +1,7 @@
 {
   "name": "thib92/flysystem-public-url-plugin",
   "description": "A Flysystem plugin to get the public URL of a file",
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
     {
@@ -13,7 +13,7 @@
     "test": "phpunit --testdox tests/"
   },
   "require": {
-    "league/flysystem": "^1.1@dev"
+    "league/flysystem": "^1.0"
   },
   "autoload": {
     "psr-4": {
