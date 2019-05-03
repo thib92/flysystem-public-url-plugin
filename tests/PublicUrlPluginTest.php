@@ -11,6 +11,17 @@ use Thib\FlysystemPublicUrlPluginTest\Support\UnsupportedAdapter;
 
 class PublicUrlPluginTest extends TestCase
 {
+
+    public function testAttachesToFilesystemInstance() {
+        $stubAdapter = $this->createStubAwsS3Adapter();
+        $filesystem = new Filesystem($stubAdapter);
+
+        $plugin = $this->createPlugin();
+        $filesystem->addPlugin($plugin);
+
+        $this->assertEquals($filesystem->getPublicUrl("/path/to/file"), "/path/to/file");
+    }
+
     public function testCallsAwsS3Adapter() {
         $stubAdapter = $this->createStubAwsS3Adapter();
         $filesystem = new Filesystem($stubAdapter);
@@ -27,9 +38,11 @@ class PublicUrlPluginTest extends TestCase
         $this->assertNull($plugin->handle("/path/to/file"));
     }
 
-    private function createPlugin(Filesystem $filesystem) {
+    private function createPlugin(?Filesystem $filesystem = null) {
         $plugin = new PublicUrlPlugin();
-        $plugin->setFilesystem($filesystem);
+        if ($filesystem) {
+            $plugin->setFilesystem($filesystem);
+        }
         return $plugin;
     }
 

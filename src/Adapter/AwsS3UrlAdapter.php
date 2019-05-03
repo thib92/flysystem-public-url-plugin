@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Thib\FlysystemPublicUrlPlugin\adapter;
+namespace Thib\FlysystemPublicUrlPlugin\Adapter;
 
 
 use Aws\S3\S3Client;
