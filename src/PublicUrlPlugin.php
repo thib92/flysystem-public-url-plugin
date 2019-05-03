@@ -7,8 +7,8 @@ use League\Flysystem\AwsS3v3\AwsS3Adapter;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemInterface;
 use League\Flysystem\PluginInterface;
-use Thib\FlysystemPublicUrlPlugin\adapter\AwsS3UrlAdapter;
-use Thib\FlysystemPublicUrlPlugin\adapter\PublicUrlAdapterInterface;
+use Thib\FlysystemPublicUrlPlugin\Adapter\AwsS3UrlAdapter;
+use Thib\FlysystemPublicUrlPlugin\Adapter\PublicUrlAdapterInterface;
 
 class PublicUrlPlugin implements PluginInterface
 {

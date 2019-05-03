@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Thib\FlysystemPublicUrlPlugin\adapter;
+namespace Thib\FlysystemPublicUrlPlugin\Adapter;
 
 
 interface PublicUrlAdapterInterface
