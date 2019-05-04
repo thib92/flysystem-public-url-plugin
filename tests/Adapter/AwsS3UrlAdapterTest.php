@@ -5,25 +5,28 @@ namespace Thib\FlysystemPublicUrlPluginTest\Adapter;
 
 
 use Aws\S3\S3Client;
+use League\Flysystem\AwsS3v3\AwsS3Adapter;
+use League\Flysystem\Filesystem;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 use Thib\FlysystemPublicUrlPlugin\Adapter\AwsS3UrlAdapter;
 
 class AwsS3UrlAdapterTest extends TestCase
 {
     public function testGetPublicUrl() {
-        $stubS3Client = $this->createMock(S3Client::class);
-        $stubS3Client->method('getObjectUrl')->willReturn("BUCKET/my/path");
+        $s3ClientProphecy = $this->prophesize(S3Client::class);
+        $s3ClientProphecy->getObjectUrl(Argument::cetera())->will(function($args) {
+            return $args[0] . $args[1];
+        });
 
-        $stubS3Client
-            ->expects($this->once())
-            ->method("getObjectUrl")
-            ->with(
-                $this->equalTo("BUCKET"),
-                $this->equalTo("/my/path")
-            );
+        $adapter = new AwsS3Adapter($s3ClientProphecy->reveal(), "BUCKET");
+        $filesystem = new Filesystem($adapter);
 
-        $adapter = new AwsS3UrlAdapter($stubS3Client, "BUCKET");
+        $urlAdapter = new AwsS3UrlAdapter();
 
-        $this->assertEquals("BUCKET/my/path", $adapter->getPublicUrl("/my/path"));
+        $urlAdapter->setFilesystem($filesystem);
+
+        $this->assertEquals("BUCKET/my/path", $urlAdapter->getPublicUrl("/my/path"));
+        $s3ClientProphecy->getObjectUrl("BUCKET", "/my/path")->shouldHaveBeenCalledOnce();
     }
 }

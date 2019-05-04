@@ -3,31 +3,26 @@
 
 namespace Thib\FlysystemPublicUrlPlugin\Adapter;
 
+use Exception;
+use League\Flysystem\AwsS3v3\AwsS3Adapter;
 
-use Aws\S3\S3Client;
-
-class AwsS3UrlAdapter implements PublicUrlAdapterInterface
+class AwsS3UrlAdapter extends AbstractPublicUrlAdapter
 {
-    /** @var S3Client */
-    private $s3Client;
-
-    /** @var string */
-    private $bucket;
-
     /**
-     * AwsS3UrlAdapter constructor.
-     * @param S3Client $s3Client
-     * @param string $bucket
+     * @param string $path
+     * @return string
+     * @throws Exception
      */
-    public function __construct(S3Client $s3Client, string $bucket)
-    {
-        $this->s3Client = $s3Client;
-        $this->bucket = $bucket;
-    }
-
-
     public function getPublicUrl(string $path): string
     {
-        return $this->s3Client->getObjectUrl($this->bucket, $path);
+        $adapter = $this->filesystem->getAdapter();
+        if (!$adapter instanceof AwsS3Adapter) {
+            throw new Exception("Filesystem adapter is not an instance of AwsS3Adapter");
+        }
+
+        $s3Client = $adapter->getClient();
+        $bucket = $adapter->getBucket();
+
+        return $s3Client->getObjectUrl($bucket, $path);
     }
 }
