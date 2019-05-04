@@ -74,7 +74,7 @@ Then you need to use the `PublicUrlPlugin::addAdapter` method to register your a
 This method takes 3 arguments:
 * The Flysystem adapter class that your PublicUrlAdapter works for
 * Your PublicUrlAdapter class (the plugin will create a new instance on every call to `getPublicUrl()`)
-* Optional: an array of constructor arguments, see [Adapter Options](#Adapters options)
+* Optional: an array of constructor arguments, see [Adapter Options](#adapters-options)
 
 ## Contributing
 
