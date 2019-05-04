@@ -4,7 +4,7 @@
 namespace Thib\FlysystemPublicUrlPlugin\Adapter;
 
 
-class LocalUrlAdapter implements PublicUrlAdapterInterface
+class LocalUrlAdapter extends AbstractPublicUrlAdapter
 {
     /** @var string */
     private $root;
@@ -18,26 +18,9 @@ class LocalUrlAdapter implements PublicUrlAdapterInterface
         $this->root = $root;
     }
 
-    /**
-     * @return string
-     */
-    public function getRoot(): string
-    {
-        return $this->root;
-    }
-
-    /**
-     * @param string $root
-     */
-    public function setRoot(string $root): void
-    {
-        $this->root = $root;
-    }
-
-
     public function getPublicUrl(string $path): string
     {
-        $root = $this->getRoot();
+        $root = $this->root;
         $trailingSlash = substr($root, -1) === '/';
 
         $leadingSlash = substr($path, 0, 1) === '/';

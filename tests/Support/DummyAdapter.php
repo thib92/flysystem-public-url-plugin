@@ -5,7 +5,7 @@ namespace Thib\FlysystemPublicUrlPluginTest\Support;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
 
-class UnsupportedAdapter implements AdapterInterface
+class DummyAdapter implements AdapterInterface
 {
 
     /**
